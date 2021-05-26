@@ -53,9 +53,13 @@ header {
   cursor: pointer;
 }
 
-.filter-btn:hover,
-.filter-btn.active {
-  border-color: rgba(175, 47, 47, 0.2);
+.filter-btn:hover {
+  border: 1px solid black;
+}
+
+.filter-btn:active,
+.filter-btn:focus {
+  border: none;
 }
 
 .footer {
@@ -67,5 +71,9 @@ header {
 .completed {
   text-decoration: line-through;
   text-decoration-color: red;
-  text-decoration-thickness: 0.15em;
+  text-decoration-thickness: 0.17em;
+}
+
+.filter-btn-active {
+  border: 1px solid black;
 }

@@ -13,28 +13,27 @@ import {
   changeFilter,
 } from './../store/actions/actionCreator';
 
+const filterTodos = (todos, filter) => {
+  switch (filter) {
+    case 'active':
+      return todos.filter((todo) => !todo.isCompleted);
+    case 'completed':
+      return todos.filter((todo) => todo.isCompleted);
+    default:
+      return todos;
+  }
+};
+
+const getActiveTodos = (todos) => {
+  return todos.filter((todo) => !todo.isCompleted).length;
+};
 class App extends React.Component {
-  filterTodos = (todos, filter) => {
-    switch (filter) {
-      case 'active':
-        return todos.filter((todo) => !todo.isCompleted);
-      case 'completed':
-        return todos.filter((todo) => todo.isCompleted);
-      default:
-        return todos;
-    }
-  };
-
-  getActiveTodos = (todos) => {
-    return todos.filter((todo) => !todo.isCompleted).length;
-  };
-
   render() {
     const { todos, addNote, removeNote, completeNote, filter, changeFilter } =
       this.props;
 
-    let filteredTodos = this.filterTodos(todos, filter);
-    let activeTodosAmount = this.getActiveTodos(todos);
+    const filteredTodos = filterTodos(todos, filter);
+    const activeTodosAmount = getActiveTodos(todos);
 
     return (
       <>
@@ -54,7 +53,11 @@ class App extends React.Component {
                 ))
               : 'Нет заметок'}
           </ul>
-          <Footer amount={activeTodosAmount} changeFilter={changeFilter} />
+          <Footer
+            amount={activeTodosAmount}
+            changeFilter={changeFilter}
+            activeFilter={filter}
+          />
         </div>
       </>
     );

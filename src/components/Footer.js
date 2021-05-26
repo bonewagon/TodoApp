@@ -7,22 +7,22 @@ const filterButtons = [
 ];
 
 export class Footer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.amount = this.props.amount;
-    this.changeFilter = this.props.changeFilter;
-  }
-
   render() {
+    const { amount, changeFilter, activeFilter } = this.props;
+
     return (
       <div className="footer">
-        <span>{`${this.amount} Todo's left`}</span>
+        <span>{`${amount} Todo's left`}</span>
         <div className="btn-group">
           {filterButtons.map(({ text, filter }) => (
             <button
               key={filter}
-              className="filter-btn"
-              onClick={() => this.changeFilter(filter)}
+              className={
+                filter === activeFilter
+                  ? 'filter-btn filter-btn-active'
+                  : 'filter-btn'
+              }
+              onClick={() => changeFilter(filter)}
             >
               {text}
             </button>

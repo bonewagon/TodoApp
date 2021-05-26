@@ -1,7 +1,7 @@
 import { ADD_NOTE, REMOVE_NOTE, COMPLETE_NOTE } from './../../constants';
 import { load } from 'redux-localstorage-simple';
 
-let NOTES = load({ namespace: 'todo-item' });
+let NOTES = load({ namespace: 'todo-app' });
 
 if (!NOTES || !NOTES.todos || !NOTES.todos.length) {
   NOTES = {

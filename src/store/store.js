@@ -4,7 +4,7 @@ import rootReducer from './reducers/rootReducer';
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(save({ namespace: 'todo-item' }))
+  applyMiddleware(save({ namespace: 'todo-app' }))
 );
 
 export default store;

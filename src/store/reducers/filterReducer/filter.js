@@ -1,7 +1,7 @@
 import { CHANGE_FILTER } from '../../constants';
 import { load } from 'redux-localstorage-simple';
 
-let NOTES = load({ namespace: 'todo-item' });
+let NOTES = load({ namespace: 'todo-app' });
 
 if (!NOTES || !NOTES.filter) {
   NOTES = {
