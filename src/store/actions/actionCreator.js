@@ -1,4 +1,9 @@
-import { ADD_NOTE, REMOVE_NOTE, COMPLETE_NOTE } from './../constants';
+import {
+  ADD_NOTE,
+  REMOVE_NOTE,
+  COMPLETE_NOTE,
+  CHANGE_FILTER,
+} from './../constants';
 
 export const addNote = (id, text, isCompleted) => ({
   type: ADD_NOTE,
@@ -15,4 +20,9 @@ export const removeNote = (id) => ({
 export const completeNote = (id) => ({
   type: COMPLETE_NOTE,
   id,
+});
+
+export const changeFilter = (activeFilter) => ({
+  type: CHANGE_FILTER,
+  filter: activeFilter,
 });

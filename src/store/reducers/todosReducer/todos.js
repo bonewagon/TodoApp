@@ -1,24 +1,15 @@
 import { ADD_NOTE, REMOVE_NOTE, COMPLETE_NOTE } from './../../constants';
+import { load } from 'redux-localstorage-simple';
 
-const NOTES = [
-  {
-    id: 1,
-    text: 'Learn ReactJS',
-    isCompleted: true,
-  },
-  {
-    id: 2,
-    text: 'Learn Redux',
-    isCompleted: false,
-  },
-  {
-    id: 3,
-    text: 'Learn React Router',
-    isCompleted: false,
-  },
-];
+let NOTES = load({ namespace: 'todo-item' });
 
-const todos = (state = NOTES, { type, id, text, isCompleted }) => {
+if (!NOTES || !NOTES.todos || !NOTES.todos.length) {
+  NOTES = {
+    todos: [],
+  };
+}
+
+const todos = (state = NOTES.todos, { type, id, text, isCompleted }) => {
   switch (type) {
     case ADD_NOTE:
       return [

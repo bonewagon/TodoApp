@@ -4,61 +4,75 @@ import { Note } from '../components/Note';
 import { Form } from '../components/Form';
 import { Footer } from '../components/Footer';
 
-let counter = 0;
+import { connect } from 'react-redux';
+
+import {
+  addNote,
+  removeNote,
+  completeNote,
+  changeFilter,
+} from './../store/actions/actionCreator';
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      notes: [],
-    };
-    this.addNote = this.addNote.bind(this);
-    this.deleteNote = this.deleteNote.bind(this);
-  }
+  filterTodos = (todos, filter) => {
+    switch (filter) {
+      case 'active':
+        return todos.filter((todo) => !todo.isCompleted);
+      case 'completed':
+        return todos.filter((todo) => todo.isCompleted);
+      default:
+        return todos;
+    }
+  };
 
-  componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
-      .then((response) => response.json())
-      .then((json) => this.setState({ notes: json }))
-      .catch(() => this.setState({ notes: [] }));
-  }
-
-  deleteNote(id) {
-    this.setState({ notes: this.state.notes.filter((note) => note.id !== id) });
-  }
-
-  addNote(note) {
-    this.setState({
-      notes: [
-        ...this.state.notes,
-        { id: counter++, title: note, completed: false },
-      ],
-    });
-  }
+  getActiveTodos = (todos) => {
+    return todos.filter((todo) => !todo.isCompleted).length;
+  };
 
   render() {
+    const { todos, addNote, removeNote, completeNote, filter, changeFilter } =
+      this.props;
+
+    let filteredTodos = this.filterTodos(todos, filter);
+    let activeTodosAmount = this.getActiveTodos(todos);
+
     return (
       <>
         <Header />
         <div className="container">
-          <Form addNote={this.addNote} />
+          <Form addNote={addNote} />
           <hr />
           <ul className="list-group">
-            {this.state.notes.length > 0
-              ? this.state.notes.map((note) => (
+            {filteredTodos.length > 0
+              ? filteredTodos.map((note) => (
                   <Note
                     note={note}
                     key={note.id}
-                    deleteNote={() => this.deleteNote(note.id)}
+                    removeNote={() => removeNote(note.id)}
+                    completeNote={completeNote}
                   />
                 ))
               : 'Нет заметок'}
           </ul>
-          <Footer amount={4} />
+          <Footer amount={activeTodosAmount} changeFilter={changeFilter} />
         </div>
       </>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todos,
+    filter: state.filter,
+  };
+};
+
+const mapDispatchToProps = {
+  addNote,
+  removeNote,
+  completeNote,
+  changeFilter,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
