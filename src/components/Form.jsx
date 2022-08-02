@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { useDispatch } from 'react-redux';
 
@@ -21,9 +21,18 @@ export function Form() {
     }
   };
 
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
   return (
     <form className="form-group pt-4" onSubmit={addTodo}>
       <input
+        ref={inputRef}
         onChange={inputChange}
         value={value}
         type="text"
