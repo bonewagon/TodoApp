@@ -5,11 +5,6 @@ import { Form } from '../components/Form';
 import { Footer } from '../components/Footer';
 
 import { useSelector } from 'react-redux';
-<<<<<<< HEAD
-=======
-
-import { completeNote } from './../store/actions/actionCreator';
->>>>>>> f2c0dbee57ad6d9377ce3bbffc0b11f36112032c
 
 const filterTodos = (todos, filter) => {
   switch (filter) {
@@ -41,13 +36,7 @@ export default function App() {
         <hr />
         <ul className="list-group">
           {filteredTodos.length > 0
-<<<<<<< HEAD
             ? filteredTodos.map((note) => <Note note={note} key={note.id} id={note.id} />)
-=======
-            ? filteredTodos.map((note) => (
-                <Note note={note} key={note.id} id={note.id} completeNote={completeNote} />
-              ))
->>>>>>> f2c0dbee57ad6d9377ce3bbffc0b11f36112032c
             : 'Нет заметок'}
         </ul>
         <Footer amount={activeTodosAmount} />
