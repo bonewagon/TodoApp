@@ -17,16 +17,16 @@ const filterTodos = (todos, filter) => {
   }
 };
 
-const getActiveTodos = (todos) => {
-  return todos.filter((todo) => !todo.isCompleted).length;
-};
+// const getActiveTodos = (todos) => {
+//   return todos.filter((todo) => !todo.isCompleted).length;
+// };
 
 export default function App() {
   const todos = useSelector((state) => state.todos);
-  const filter = useSelector((state) => state.filter);
+  const filter = useSelector((state) => state.filter.filter);
 
   const filteredTodos = filterTodos(todos, filter);
-  const activeTodosAmount = getActiveTodos(todos);
+  const filteredTodosAmount = filteredTodos.length;
 
   return (
     <>
@@ -39,7 +39,7 @@ export default function App() {
             ? filteredTodos.map((note) => <Note note={note} key={note.id} id={note.id} />)
             : 'Нет заметок'}
         </ul>
-        <Footer amount={activeTodosAmount} />
+        <Footer amount={filteredTodosAmount} />
       </div>
     </>
   );

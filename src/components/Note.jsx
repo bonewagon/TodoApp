@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import { removeNote, completeNote } from '../store/actions/actionCreator';
+import { removeNote, completeNote } from '../store/Slices/TodoSlice';
 
 export function Note({ note, id }) {
   const dispatch = useDispatch();

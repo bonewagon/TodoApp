@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import { addNote } from '../store/actions/actionCreator';
+import { addNote } from '../store/Slices/TodoSlice';
 
 export function Form() {
   const dispatch = useDispatch();
@@ -16,7 +16,8 @@ export function Form() {
   const addTodo = (e) => {
     e.preventDefault();
     if (value) {
-      dispatch(addNote(new Date().getTime(), value, false));
+      // dispatch(addNote(new Date().getTime(), value, false));
+      dispatch(addNote({ id: new Date().getTime(), text: value, isComplited: false }));
       setValue('');
     }
   };

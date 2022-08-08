@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { changeFilter } from '../store/actions/actionCreator';
+import { changeFilter } from '../store/Slices/FilterSlice';
 
 const filterButtons = [
   { text: 'All', filter: 'all' },
@@ -12,12 +12,16 @@ const filterButtons = [
 export function Footer(props) {
   const { amount } = props;
 
-  const activeFilter = useSelector((state) => state.filter);
+  const activeFilter = useSelector((state) => state.filter.filter);
   const dispatch = useDispatch();
 
   return (
     <div className="footer">
-      <span>{`${amount} Todo's left`}</span>
+      <span>
+        {`${amount} ${
+          activeFilter === 'all' ? 'Todos' : activeFilter === 'active' ? 'Todos left' : 'Todos done'
+        }`}
+      </span>
       <div className="btn-group">
         {filterButtons.map(({ text, filter }) => (
           <button
