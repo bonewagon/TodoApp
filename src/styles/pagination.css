@@ -1,0 +1,38 @@
+.pagination {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.arrowButton img {
+    width: 80%;
+}
+
+.pagination button {
+    cursor: pointer;
+    width: 30px;
+    height: 100%;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    font-size: 1em;
+}
+
+.arrowButton {
+    border: none;
+    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrowButton[disabled] {
+    opacity: 0.25;
+}
+
+button.active {
+    background: #4287f5;
+    color: #fff;
+}
