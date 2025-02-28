@@ -19,8 +19,6 @@ const App = () => {
     const activeFilter = useSelector((state) => state.filter);
     const currentPage = useSelector((state) => state.currentPage);
 
-    // const [currentPage, setCurrentPage] = useState(1);
-
     const dispatch = useDispatch();
 
     useEffect(() => {
